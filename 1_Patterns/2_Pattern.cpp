@@ -5,12 +5,12 @@ using namespace std;
 
 int main()
 {
-    int row, col;
-    cin >> row >> col;
+    int n;
+    cin>>n;
 
-    for (int i = 0; i < row; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < col; j++)
+        for (int j = 0; j < n; j++)
         {
             cout<<"* ";
         }
