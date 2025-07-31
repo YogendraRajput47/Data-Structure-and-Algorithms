@@ -1,0 +1,1 @@
+Hollow Inverted Half Pyramid
