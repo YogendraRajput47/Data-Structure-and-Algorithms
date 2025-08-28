@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>   // Required for using vectors
+using namespace std;
+
+int main() {
+    /*
+    ================================
+        VECTORS IN C++
+    ================================
+    - Vectors are dynamic arrays (part of STL).
+    - Unlike arrays, they can change size at runtime.
+    - Header file: <vector>
+    - Syntax: vector<data_type> name;
+    */
+
+    // 1. Declaration
+    vector<int> v1;              // empty vector of integers
+    vector<int> v2(5, 10);       // vector of size 5, all elements initialized to 10
+    vector<int> v3 = {1, 2, 3};  // vector initialized with values
+
+    // 2. Adding elements
+    v1.push_back(5);   // adds 5 at the end
+    v1.push_back(10);  // adds 10 at the end
+
+    // 3. Accessing elements
+    cout << "First element: " << v1[0] << endl;       // using index (no bounds check)
+    cout << "Second element: " << v1.at(1) << endl;   // using at() (with bounds check)
+    cout << "Front: " << v1.front() << endl;          // first element
+    cout << "Back: " << v1.back() << endl;            // last element
+
+    // 4. Size and Capacity
+    cout << "Size: " << v1.size() << endl;            // number of elements
+    cout << "Capacity: " << v1.capacity() << endl;    // allocated space
+    cout << "Is empty? " << v1.empty() << endl;       // check if vector is empty
+
+    // 5. Removing elements
+    v1.pop_back();   // removes last element
+
+    // 6. Iterating through a vector
+    cout << "Iterating with index: ";
+    for (int i = 0; i < v1.size(); i++) {
+        cout << v1[i] << " ";
+    }
+    cout << endl;
+
+    cout << "Iterating with iterator: ";
+    for (auto it = v1.begin(); it != v1.end(); it++) {
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    cout << "Iterating with range-based for loop: ";
+    for (int x : v1) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    // 7. Useful functions
+    v1.clear();   // removes all elements (size = 0, capacity unchanged)
+
+    // Swapping vectors
+    vector<int> a = {1, 2, 3};
+    vector<int> b = {4, 5};
+    a.swap(b);   // now a = {4, 5}, b = {1, 2, 3}
+
+    return 0;
+}
