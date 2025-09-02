@@ -1,0 +1,176 @@
+// ===============================================================
+// 📘 2-D VECTORS IN C++ (From Basics to Advanced)
+// ===============================================================
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+// ---------------------------------------------------------------
+// 1. BASICS OF 2-D VECTORS
+// ---------------------------------------------------------------
+// Syntax: vector<vector<dataType>> vec;
+//
+// Unlike 2D arrays, 2D vectors are dynamic (size can grow/shrink).
+// Example:
+    vector<vector<int>> vec1 = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    cout << "Access element (1,2): " << vec1[1][2] << endl; // 6
+
+
+// ---------------------------------------------------------------
+// 2. DECLARATION METHODS
+// ---------------------------------------------------------------
+
+// ✅ Empty 2D vector
+    vector<vector<int>> v1;
+
+// ✅ Fixed size 2D vector (3 rows, 4 columns, initialized with 0)
+    vector<vector<int>> v2(3, vector<int>(4, 0));
+
+// ✅ Jagged 2D vector (rows with variable columns)
+    vector<vector<int>> jagged = {
+        {1, 2},
+        {3, 4, 5},
+        {6}
+    };
+
+
+// ---------------------------------------------------------------
+// 3. INPUT & OUTPUT IN 2-D VECTORS
+// ---------------------------------------------------------------
+
+    int rows = 2, cols = 3;
+    vector<vector<int>> mat(rows, vector<int>(cols));
+
+    cout << "Enter elements of 2x3 matrix:\n";
+    for(int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            cin >> mat[i][j];
+        }
+    }
+
+    cout << "Matrix is:\n";
+    for(int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            cout << mat[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+
+// ---------------------------------------------------------------
+// 4. COMMON OPERATIONS
+// ---------------------------------------------------------------
+
+// ✅ Row-wise sum
+    int rowSum = 0;
+    for(int j=0; j<cols; j++) rowSum += mat[0][j];
+    cout << "Row 0 sum = " << rowSum << endl;
+
+// ✅ Column-wise sum
+    int colSum = 0;
+    for(int i=0; i<rows; i++) colSum += mat[i][1]; // 2nd column
+    cout << "Col 1 sum = " << colSum << endl;
+
+// ✅ Push a new row dynamically
+    mat.push_back({7, 8, 9});
+    cout << "After push_back, rows = " << mat.size() << endl;
+
+
+// ---------------------------------------------------------------
+// 5. ADVANCED OPERATIONS
+// ---------------------------------------------------------------
+
+// ✅ Transpose of a matrix
+    vector<vector<int>> transpose(cols, vector<int>(rows));
+    for(int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            transpose[j][i] = mat[i][j];
+        }
+    }
+    cout << "Transpose:\n";
+    for(auto row : transpose) {
+        for(auto val : row) cout << val << " ";
+        cout << endl;
+    }
+
+// ✅ Searching in 2D vector
+    int key = 5;
+    bool found = false;
+    for(int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            if(mat[i][j] == key) {
+                found = true;
+                cout << "Found " << key << " at (" << i << "," << j << ")" << endl;
+            }
+        }
+    }
+    if(!found) cout << key << " not found!" << endl;
+
+// ✅ Spiral Traversal
+    cout << "Spiral Traversal: ";
+    int top=0, bottom=rows-1, left=0, right=cols-1;
+    while(top<=bottom && left<=right) {
+        for(int j=left; j<=right; j++) cout << mat[top][j] << " ";
+        top++;
+        for(int i=top; i<=bottom; i++) cout << mat[i][right] << " ";
+        right--;
+        if(top<=bottom) {
+            for(int j=right; j>=left; j--) cout << mat[bottom][j] << " ";
+            bottom--;
+        }
+        if(left<=right) {
+            for(int i=bottom; i>=top; i--) cout << mat[i][left] << " ";
+            left++;
+        }
+    }
+    cout << endl;
+
+
+// ✅ Matrix Multiplication
+    vector<vector<int>> A = {{1,2},{3,4}};
+    vector<vector<int>> B = {{5,6},{7,8}};
+    int n = A.size(), m = B[0].size(), p = B.size();
+    vector<vector<int>> C(n, vector<int>(m,0));
+
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m; j++) {
+            for(int k=0; k<p; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    cout << "Matrix Multiplication Result:\n";
+    for(auto row : C) {
+        for(auto val : row) cout << val << " ";
+        cout << endl;
+    }
+
+
+// ---------------------------------------------------------------
+// 6. JAGGED 2-D VECTOR (Different column sizes per row)
+// ---------------------------------------------------------------
+    vector<vector<int>> jag;
+    jag.push_back({1,2,3});
+    jag.push_back({4,5});
+    jag.push_back({6,7,8,9});
+
+    cout << "Jagged Vector:\n";
+    for(auto row : jag) {
+        for(auto val : row) cout << val << " ";
+        cout << endl;
+    }
+
+
+// ---------------------------------------------------------------
+// END OF NOTES
+// ---------------------------------------------------------------
+    return 0;
+}
